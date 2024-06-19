@@ -1,5 +1,8 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
+# datasets
+/data
+
 # docs
 docs/dependency-graph
 site
@@ -8,6 +11,8 @@ site
 # python
 __pycache__
 reports
+.coverage
+.cache
 
 # compiled output
 dist

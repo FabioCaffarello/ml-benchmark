@@ -13,6 +13,10 @@ package-mode = false
     path = "./datasets/cifar10-dataset"
     develop = true
 
+    [tool.poetry.dependencies.cnn-benchmark]
+    path = "./benchmarks/python/cnn-benchmark"
+    develop = true
+
 [tool.poetry.group.docs.dependencies]
 mkdocs = "^1.6.0"
 mkdocs-material = "^9.5.23"

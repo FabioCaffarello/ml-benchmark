@@ -23,6 +23,9 @@ check: guard-project cleanup
 check-all: cleanup
 	npx nx run-many --target=test --all
 
+run:
+	docker-compose up -d
+
 cleanup:
 	@npx nx reset;
 	@containers=$$(docker ps -q -a); \

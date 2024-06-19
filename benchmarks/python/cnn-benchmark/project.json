@@ -1,14 +1,14 @@
 {
-  "name": "datasets-cifar10-dataset",
-  "$schema": "../../node_modules/nx/schemas/project-schema.json",
+  "name": "benchmarks-python-cnn-benchmark",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
-  "sourceRoot": "./datasets/cifar10-dataset/downloader",
+  "sourceRoot": "./benchmarks/python/cnn-benchmark/cnn_benchmark",
   "targets": {
     "lock": {
       "executor": "@nxlv/python:run-commands",
       "options": {
         "command": "poetry lock --no-update",
-        "cwd": "./datasets/cifar10-dataset"
+        "cwd": "./benchmarks/python/cnn-benchmark"
       }
     },
     "add": {
@@ -29,7 +29,7 @@
         "{projectRoot}/dist"
       ],
       "options": {
-        "outputPath": "./datasets/cifar10-dataset/dist",
+        "outputPath": "./benchmarks/python/cnn-benchmark/dist",
         "publish": false,
         "lockedVersions": true,
         "bundleLocalDependencies": true
@@ -48,35 +48,17 @@
     "lint": {
       "executor": "@nxlv/python:flake8",
       "outputs": [
-        "{workspaceRoot}/reports/./datasets/cifar10-dataset/pylint.txt"
+        "{workspaceRoot}/reports/./benchmarks/python/cnn-benchmark/pylint.txt"
       ],
       "options": {
-        "outputFile": "reports/./datasets/cifar10-dataset/pylint.txt"
-      }
-    },
-    "test": {
-      "executor": "@nxlv/python:run-commands",
-      "outputs": [
-        "{workspaceRoot}/reports/./datasets/cifar10-dataset/unittests",
-        "{workspaceRoot}/coverage/./datasets/cifar10-dataset"
-      ],
-      "options": {
-        "command": "poetry run pytest tests/",
-        "cwd": "{projectRoot}"
+        "outputFile": "reports/./benchmarks/python/cnn-benchmark/pylint.txt"
       }
     },
     "image": {
       "executor": "nx:run-commands",
       "dependsOn": ["build"],
       "options": {
-        "command": "docker build -t fabiocaffarello/cifar10-dataset:latest -f ./Dockerfile .",
-        "cwd": "{projectRoot}"
-      }
-    },
-    "get-dataset-local": {
-      "executor": "nx:run-commands",
-      "options": {
-        "command": "poetry run python downloader/main.py",
+        "command": "docker build -t fabiocaffarello/py-cnn-benchmark:latest -f ./Dockerfile .",
         "cwd": "{projectRoot}"
       }
     }

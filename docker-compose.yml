@@ -1,0 +1,22 @@
+services:
+  cifar10-dataset:
+    image: fabiocaffarello/cifar10-dataset:latest
+    volumes:
+      - ./data/cifar10:/app/data
+    environment:
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "test", "-f", "/app/data/processing_complete"]
+      interval: 150s
+      timeout: 5s
+      retries: 5
+
+  py-cnn-benchmark:
+    image: fabiocaffarello/py-cnn-benchmark:latest
+    volumes:
+      - ./data/cifar10:/app/data
+    depends_on:
+      cifar10-dataset:
+          condition: service_healthy
+    environment:
+      - PYTHONUNBUFFERED=1

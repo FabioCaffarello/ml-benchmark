@@ -5,6 +5,10 @@ docs/dependency-graph
 site
 **/docs/godoc.md
 
+# python
+__pycache__
+reports
+
 # compiled output
 dist
 tmp

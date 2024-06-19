@@ -18,6 +18,9 @@
         },
         "ghcr.io/devcontainers/features/rust:1": {}
     },
+    "mounts": [
+        "source=${env:HOME}/.ssh,target=/home/vscode/.ssh,type=bind,consistency=cached"
+    ],
     "forwardPorts": [
     ],
     "customizations": {

@@ -1,0 +1,72 @@
+name: Docs Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  actions: read
+  contents: write
+  pages: write
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 20
+          cache: 'npm'
+      - run: npm ci
+
+      - uses: nrwl/nx-set-shas@v4
+
+      - name: Install Go
+        uses: actions/setup-go@v2
+        with:
+          go-version: 1.22
+
+      - run: go install github.com/princjef/gomarkdoc/cmd/gomarkdoc@latest
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+
+      - run: git fetch origin main
+
+      - name: Install Poetry
+        uses: Gr1N/setup-poetry@v8
+        with:
+          poetry-version: 1.8.3
+
+      - name: Load cached venv
+        id: cached-poetry-dependencies
+        uses: actions/cache@v2
+        with:
+          path: .venv
+          key: venv-${{ hashFiles('**/poetry.lock') }}
+
+      - name: Poetry Install Dependencies
+        run: poetry install
+
+      - name: Build Requirements for doc deploy
+        run: make build-docs
+
+      - name: Configure Git for Deployment
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git remote set-url origin https://${{ secrets.CI_BOT_TOKEN }}@github.com/${{ github.repository }}.git
+
+      - name: Doc deployment
+        env:
+          HUSKY: 0
+        run: |
+          git checkout -b gh-pages
+          poetry run mkdocs gh-deploy --force --remote-name origin --remote-branch gh-pages
+

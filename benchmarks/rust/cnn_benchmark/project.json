@@ -1,0 +1,60 @@
+{
+  "name": "benchmarks-rust-cnn-benchmark",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "projectType": "application",
+  "sourceRoot": "./benchmarks/rust/cnn_benchmark/src",
+  "targets": {
+    "build": {
+      "executor": "@monodon/rust:build",
+      "outputs": [
+        "{options.target-dir}"
+      ],
+      "options": {
+        "target-dir": "{projectRoot}/dist/target/benchmarks_rust_cnn_benchmark"
+      },
+      "configurations": {
+        "production": {
+          "release": true
+        }
+      }
+    },
+    "test": {
+      "executor": "@monodon/rust:test",
+      "outputs": [
+        "{options.target-dir}"
+      ],
+      "options": {
+        "target-dir": "{projectRoot}/dist/target/benchmarks_rust_cnn_benchmark"
+      },
+      "configurations": {
+        "production": {
+          "release": true
+        }
+      }
+    },
+    "lint": {
+      "executor": "@monodon/rust:lint",
+      "outputs": [
+        "{options.target-dir}"
+      ],
+      "options": {
+        "target-dir": "{projectRoot}/dist/target/benchmarks_rust_cnn_benchmark"
+      }
+    },
+    "run": {
+      "executor": "@monodon/rust:run",
+      "outputs": [
+        "{options.target-dir}"
+      ],
+      "options": {
+        "target-dir": "{projectRoot}/dist/target/benchmarks_rust_cnn_benchmark"
+      },
+      "configurations": {
+        "production": {
+          "release": true
+        }
+      }
+    }
+  },
+  "tags": []
+}

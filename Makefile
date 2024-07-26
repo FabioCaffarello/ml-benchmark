@@ -7,6 +7,9 @@ guard-%:
 		exit 1; \
 	fi
 
+image:
+	npx nx run-many --target=image --all --configuration=production
+
 build-docs:
 	npx nx graph --file=docs/dependency-graph/index.html
 	npx nx  run-many --target=godoc --all
@@ -25,6 +28,10 @@ check-all: cleanup
 
 run:
 	docker-compose up -d
+
+purge-images:
+	@docker images --filter "dangling=true" -q | xargs -r docker rmi
+
 
 cleanup:
 	@npx nx reset;

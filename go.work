@@ -1,1 +1,8 @@
 go 1.22
+
+use (
+	./benchmarks/golang/cnn-benchmark
+	./libs/golang/tensor/cnn-model
+	./libs/golang/tensor/data
+	./libs/golang/tensor/trainer
+)

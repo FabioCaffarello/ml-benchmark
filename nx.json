@@ -13,6 +13,7 @@
     ]
   },
   "plugins": [
-    "@nx-go/nx-go"
+    "@nx-go/nx-go",
+    "@monodon/rust"
   ]
 }

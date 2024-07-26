@@ -60,6 +60,12 @@
       "options": {
         "command": "docker build -t fabiocaffarello/py-cnn-benchmark:latest -f ./Dockerfile .",
         "cwd": "{projectRoot}"
+      },
+      "configurations": {
+        "production": {
+          "env": {
+          }
+        }
       }
     }
   },
